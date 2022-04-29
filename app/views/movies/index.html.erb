@@ -1,0 +1,35 @@
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <!-- <form action="<%= movies_path %>">
+        <input type="text" name="query" class="form-control" placeholder="Find a movie">
+        <input type="submit" value="Search", class="btn btn-primary">
+      </form> -->
+
+      <%#= form_with(url: movies_path) do |f| %>
+        <%#= f.text_field :query, value: params[:query], class: "form-control" %>
+        <%#= f.submit 'Search', class: "btn btn-primary" %>
+      <%# end %>
+
+      <%= form_tag movies_path, method: :get do %>
+        <!-- text_file_tag(name, value) -->
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Find a movie"
+        %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %>
+
+      <div id="movies">
+        <% @movies.each do |movie| %>
+          <h4><%= movie.title %></h4>
+          <p><%= movie.synopsis %></p>
+          <p><%= movie.director.first_name %> <%= movie.director.last_name %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

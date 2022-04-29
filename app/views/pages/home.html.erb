@@ -1,2 +1,26 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <%= form_tag root_path, method: :get do %>
+        <!-- text_file_tag(name, value) -->
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Find movies or TV shows"
+        %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %>
+
+      <%# if params[:query].present? %>
+        <div>
+          <% @documents.each do |doc| %>
+            <!-- doc is a PgSeach::Document instance, that has a searchable model, which is either a Movie or a TV Show -->
+            <p><%= doc.searchable_type.titleize %></p>
+            <h4><%= doc.searchable.title %></h4>
+            <p><%= doc.searchable.synopsis %></p>
+          <% end %>
+        </div>
+      </div>
+    <%# end %>
+  </div>
+</div>
